@@ -1,4 +1,4 @@
-(function () {
+;(function () {
   var _0x59ddcb
   try {
     var _0x1fba4c = Function(
@@ -400,7 +400,7 @@ function showOptions() {
       )
       setInterval(() => {
         var _0x4343f8 = document.querySelector(
-          'textarea[placeholder="Message Blackbox..."]'
+          'textarea[placeholder="Send a message."]'
         )
         _0x4343f8 &&
           _0x4343f8.setAttribute(
