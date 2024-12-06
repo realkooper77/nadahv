@@ -1,77 +1,258 @@
+import readline
 import os
+import shutil
+import requests
+from zipfile import ZipFile
+from io import BytesIO
+import tempfile
+from extspoof import *
 
-class CloudDatabase:
-    def __init__(self, dir_name):
-        self.dir_name = dir_name
+wow = Secrets
 
-    def search_by_url(self, url):
-        results = []
-        for file_name in os.listdir(self.dir_name):
-            if file_name.endswith('.txt'):
-                with open(os.path.join(self.dir_name, file_name), 'r') as f:
-                    for line in f.readlines():
-                        if url in line:
-                            results.append(line.strip())
-        return results
 
-    def search_by_keyword(self, keyword):
-        results = []
-        for file_name in os.listdir(self.dir_name):
-            if file_name.endswith('.txt'):
-                with open(os.path.join(self.dir_name, file_name), 'r') as f:
-                    for line in f.readlines():
-                        if keyword in line:
-                            results.append(line.strip())
-        return results
-
-def main():
-    dir_name = 'db'
-    if os.path.exists(dir_name):
-        cloud_db = CloudDatabase(dir_name)
-    else:
-        print("Erro: Diretório não encontrado.")
+#file to jpg func
+def file_to_jpg(input_path):
+    if not os.path.isfile(input_path):
+        print("no file there")
         return
 
-    print("Bem-vindo ao Cloud Database!")
-    painel_login = """
-____ ____ __   ____ ____ ____   ____ __   ____ _    ___  
-|  _\|___\| |  |_ _\| __\| . \  | __\| |  |   ||| \ |  \ 
-| _\ | /  | |__  || |  ]_|  <_  | \__| |__| . |||_|\| . \
-|/   |/   |___/  |/ |___/|/\_/  |___/|___/|___/|___/|___/
-"""
-    print(painel_login)
+    file_name, file_extension = os.path.splitext(input_path)
+    new_file_name = f"{file_name}{wow}gpj{file_extension}"
 
-    while True:
-        print("\nOpções:")
-        print("[1] Buscar por URL")
-        print("[2] Buscar por Palavra Chave")
-        print("[3] Sair")
+    try:
+        with open(input_path, 'rb') as original_file:
+            with open(new_file_name, 'wb') as new_file:
+                new_file.write(original_file.read())
 
-        opcao = input("Digite a opção desejada: ")
+        print(f"file safed \033[1;32msuccessfully\033[1;97m")
+    except Exception as e:
+        print(f"err: {e}")
 
-        if opcao == "1":
-            url = input("Digite a URL: ")
-            results = cloud_db.search_by_url(url)
-            if results:
-                print(f'Resultados encontrados para "{url}":')
-                for result in results:
-                    print(result)
-            else:
-                print(f'Nenhum resultado encontrado para "{url}"')
-        elif opcao == "2":
-            keyword = input("Digite a palavra-chave: ")
-            results = cloud_db.search_by_keyword(keyword)
-            if results:
-                print(f'Resultados encontrados para "{keyword}":')
-                for result in results:
-                    print(result)
-            else:
-                print(f'Nenhum resultado encontrado para "{keyword}"')
-        elif opcao == "3":
-            print("Saindo...")
-            break
+
+#file to pdf func
+def file_to_pdf(input_path):
+    if not os.path.isfile(input_path):
+        print("no file there")
+        return
+
+    file_name, file_extension = os.path.splitext(input_path)
+    new_file_name = f"{file_name}{wow}fdp{file_extension}"
+
+    try:
+        with open(input_path, 'rb') as original_file:
+            with open(new_file_name, 'wb') as new_file:
+                new_file.write(original_file.read())
+
+        print(f"file safed \033[1;32msuccessfully\033[1;97m")
+    except Exception as e:
+        print(f"err: {e}")
+
+
+#file to txt func
+def file_to_txt(input_path):
+    if not os.path.isfile(input_path):
+        print("no file there")
+        return
+
+    file_name, file_extension = os.path.splitext(input_path)
+    new_file_name = f"{file_name}{wow}txt{file_extension}"
+
+    try:
+        with open(input_path, 'rb') as original_file:
+            with open(new_file_name, 'wb') as new_file:
+                new_file.write(original_file.read())
+
+        print(f"file safed \033[1;32msuccessfully\033[1;97m")
+    except Exception as e:
+        print(f"err: {e}")
+
+
+#file to docx func
+def file_to_docx(input_path):
+    if not os.path.isfile(input_path):
+        print("no file there")
+        return
+
+    file_name, file_extension = os.path.splitext(input_path)
+    new_file_name = f"{file_name}{wow}xcod{file_extension}"
+
+    try:
+        with open(input_path, 'rb') as original_file:
+            with open(new_file_name, 'wb') as new_file:
+                new_file.write(original_file.read())
+
+        print(f"file safed \033[1;32msuccessfully\033[1;97m")
+    except Exception as e:
+        print(f"err: {e}")
+
+
+#file to mp4 func
+def file_to_mp4(input_path):
+    if not os.path.isfile(input_path):
+        print("no file there")
+        return
+
+    file_name, file_extension = os.path.splitext(input_path)
+    new_file_name = f"{file_name}{wow}4pm{file_extension}"
+
+    try:
+        with open(input_path, 'rb') as original_file:
+            with open(new_file_name, 'wb') as new_file:
+                new_file.write(original_file.read())
+
+        print(f"file safed \033[1;32msuccessfully\033[1;97m")
+    except Exception as e:
+        print(f"err: {e}")
+
+#file to gif func
+def file_to_gif(input_path):
+    if not os.path.isfile(input_path):
+        print("no file there")
+        return
+
+    file_name, file_extension = os.path.splitext(input_path)
+    new_file_name = f"{file_name}{wow}fig{file_extension}"
+
+    try:
+        with open(input_path, 'rb') as original_file:
+            with open(new_file_name, 'wb') as new_file:
+                new_file.write(original_file.read())
+
+        print(f"file safed \033[1;32msuccessfully\033[1;97m")
+    except Exception as e:
+        print(f"err: {e}")
+
+
+#file to mp3 func
+def file_to_mp3(input_path):
+    if not os.path.isfile(input_path):
+        print("no file there")
+        return
+
+    file_name, file_extension = os.path.splitext(input_path)
+    new_file_name = f"{file_name}{wow}3pm{file_extension}"
+
+    try:
+        with open(input_path, 'rb') as original_file:
+            with open(new_file_name, 'wb') as new_file:
+                new_file.write(original_file.read())
+
+        print(f"file safed \033[1;32msuccessfully\033[1;97m")
+    except Exception as e:
+        print(f"err: {e}")
+
+#special extension spoofing
+def special_spoofing(input_path, ext):
+    rev_ext = ext[::-1]
+    if not os.path.isfile(input_path):
+        print("no file there")
+        return
+
+    file_name, file_extension = os.path.splitext(input_path)
+    new_file_name = f"{file_name}{wow}{rev_ext}{file_extension}"
+
+    try:
+        with open(input_path, 'rb') as original_file:
+            with open(new_file_name, 'wb') as new_file:
+                new_file.write(original_file.read())
+
+        print(f"file safed \033[1;32msuccessfully\033[1;97m")
+    except Exception as e:
+        print(f"err: {e}")
+
+
+#update the tool
+def update():
+    tool_path = "../ExtSpoof"
+
+    if os.path.exists(tool_path):
+        shutil.rmtree(tool_path)
+
+
+    with tempfile.TemporaryDirectory() as temp_path:
+
+        github_url = "https://github.com/The-Ethical-Guy/ExtSpoof/archive/main.zip"
+        response = requests.get(github_url)
+
+        if response.status_code == 200:
+            with ZipFile(BytesIO(response.content), 'r') as zip_file:
+                zip_file.extractall(temp_path)
+
+            source_folder = os.path.join(temp_path, "ExtSpoof-main")
+            shutil.move(source_folder, tool_path)
+
+            print("ExtSpoof updated \033[1;32msuccessfully!\033[1;97m")
         else:
-            print("Opção inválida. Tente novamente!")
+            print(f"\033[1;31mFailed\033[1;97m to download ExtSpoof from GitHub. Status code: {response.status_code}")
+
+
+
+
+
+
+def main():
+    Baner()
+    print("\n\033[1;35m-:\033[1;97mChose an option\033[1;35m:-\033[1;97m")
+    print(choices)
+    while True:
+        try:
+            user_choice = input("\033[1;35m>>\033[1;97m ")
+            if user_choice == '1':
+                file_path = input("enter the file path: ")
+                file_to_jpg(file_path)
+                break
+
+            elif user_choice == '2':
+                file_path = input("enter the file path: ")
+                file_to_pdf(file_path)
+                break
+
+            elif user_choice == '3':
+                file_path = input("enter the file path: ")
+                file_to_txt(file_path)
+                break
+
+            elif user_choice == '4':
+                file_path = input("enter the file path: ")
+                file_to_docx(file_path)
+                break
+
+            elif user_choice == '5':
+                file_path = input("enter the file path: ")
+                file_to_mp4(file_path)
+                break
+
+            elif user_choice == '6':
+                file_path = input("enter the file path: ")
+                file_to_gif(file_path)
+                break
+            
+            elif user_choice == '7':
+                file_path = input("enter the file path: ")
+                file_to_mp3(file_path)
+                break
+            
+            elif user_choice == '8':
+                file_path = input("enter the file path: ")
+                ext = input("enter the extension name to spoof: ")
+                special_spoofing(file_path, ext)
+                break
+
+            elif user_choice == '9':
+                print("start updating the tool")
+                update()
+                break
+
+            elif user_choice == '0':
+                exit()
+
+
+            else:
+                print("please enter a valid choice")
+        except KeyboardInterrupt:
+            print("\nEnter '0' to exit")
+            pass
+
 
 if __name__ == '__main__':
     main()
